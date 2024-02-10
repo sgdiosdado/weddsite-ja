@@ -1,3 +1,8 @@
 @tailwind base;
+@layer base {
+  * {
+    font-family: 'Noto Serif Georgian', monospace;
+  }
+}
 @tailwind components;
 @tailwind utilities;

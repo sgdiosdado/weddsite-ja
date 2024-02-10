@@ -1,13 +1,19 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { LoaderFunctionArgs, MetaFunction } from '@remix-run/node';
+import { RouteParams } from 'routes-gen';
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Boda Jacqueline y Andrés" },
-    { name: "description", content: "Invitación boda Jacqueline y Andrés" },
+    { title: 'Boda Jacqueline y Andrés' },
+    { name: 'description', content: 'Invitación boda Jacqueline y Andrés' },
   ];
 };
 
-export default function Index() {
+export function loader({ params }: LoaderFunctionArgs) {
+  const { invitationId } = params as RouteParams['/:invitationId'];
+  return invitationId;
+}
+
+export default function Invitation() {
   return (
     <main className="flex flex-col bg-[#737F69]">
       <section className="flex min-h-svh flex-col items-center justify-between bg-green-50 text-gray-500">
