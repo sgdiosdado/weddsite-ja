@@ -9,8 +9,12 @@ export const invitations = sqliteTable('invitations', {
     .primaryKey()
     .$defaultFn(() => uuidv4()),
   phoneNumber: text('phoneNumber').notNull(),
-  createdAt: text('createdAt').default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text('createdAt').default(sql`CURRENT_TIMESTAMP`),
+  createdAt: text('createdAt')
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text('createdAt')
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
 });
 
 export const guests = sqliteTable('guests', {
@@ -22,6 +26,10 @@ export const guests = sqliteTable('guests', {
     .notNull()
     .default('pending'),
   invitationId: text('invitationId').references(() => invitations.id),
-  createdAt: text('createdAt').default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text('createdAt').default(sql`CURRENT_TIMESTAMP`),
+  createdAt: text('createdAt')
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text('createdAt')
+    .notNull()
+    .default(sql`CURRENT_TIMESTAMP`),
 });
