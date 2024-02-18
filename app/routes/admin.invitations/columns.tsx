@@ -1,8 +1,11 @@
+import { Link } from '@remix-run/react';
 import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { useCopyToClipboard } from '@uidotdev/usehooks';
 import { MouseEventHandler, PropsWithChildren } from 'react';
 import { z } from 'zod';
+import { Button } from '~/components/ui/button';
 import { useToast } from '~/components/ui/use-toast';
+import { Guest } from '../admin_.invitations.$id/columns';
 
 const invitationSchema = z.object({
   id: z.string().uuid(),
@@ -38,6 +41,17 @@ export const columns = [
   columnHelper.accessor('guests', {
     header: 'Cantidad de invitados',
   }),
+  {
+    accessorKey: 'actions',
+    header: '',
+    cell: ({ row }) => (
+      <Button asChild variant="link">
+        <Link to={`/admin/invitations/${row.original.id}`}>
+          Editar invitados
+        </Link>
+      </Button>
+    ),
+  } as ColumnDef<Guest>,
 ];
 
 function IdCell({ children }: PropsWithChildren) {

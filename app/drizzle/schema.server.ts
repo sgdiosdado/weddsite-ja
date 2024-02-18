@@ -1,35 +1,31 @@
 import { sql } from 'drizzle-orm';
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
 import { v4 as uuidv4 } from 'uuid';
 
 // TODO: Replace sqlite with pg
 
-export const invitations = sqliteTable('invitations', {
-  id: text('id')
+export const invitations = pgTable('invitations', {
+  id: uuid('id')
     .primaryKey()
     .$defaultFn(() => uuidv4()),
-  phoneNumber: text('phoneNumber').notNull(),
-  createdAt: text('createdAt')
-    .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text('createdAt')
-    .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
+  phoneNumber: varchar('phone_number', { length: 10 }).notNull(),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
 
-export const guests = sqliteTable('guests', {
-  id: text('id')
+export const guests = pgTable('guests', {
+  id: uuid('id')
     .primaryKey()
     .$defaultFn(() => uuidv4()),
   name: text('name').notNull(),
-  status: text('status', { enum: ['going', 'not going', 'pending'] })
+  status: varchar('status', { enum: ['going', 'not going', 'pending'] })
     .notNull()
     .default('pending'),
-  invitationId: text('invitationId').references(() => invitations.id),
-  createdAt: text('createdAt')
+  invitationId: uuid('invitationId')
     .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
-  updatedAt: text('createdAt')
-    .notNull()
-    .default(sql`CURRENT_TIMESTAMP`),
+    .references(() => invitations.id, {
+      onDelete: 'cascade',
+    }),
+  createdAt: timestamp('created_at').notNull().defaultNow(),
+  updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });
