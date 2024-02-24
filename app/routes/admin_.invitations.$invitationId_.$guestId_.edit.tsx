@@ -54,7 +54,8 @@ export async function action({ request, params }: ActionFunctionArgs) {
 }
 
 export default function NewInvitation() {
-  const { id } = useParams<RouteParams['/admin/invitations/:id/new']>();
+  const { invitationId } =
+    useParams<RouteParams['/admin/invitations/:invitationId/:guestId/edit']>();
   const lastResult = useActionData<typeof action>();
   const defaultValue = useLoaderData<typeof loader>();
 
@@ -62,7 +63,7 @@ export default function NewInvitation() {
     <div className="mx-auto flex flex-col gap-4 px-4 py-12">
       <div className="flex items-center gap-2 text-sm text-neutral-600">
         <Button asChild variant="link">
-          <Link to={`/admin/invitations/${id}/`}>Invitación</Link>
+          <Link to={`/admin/invitations/${invitationId}`}>Invitación</Link>
         </Button>
         <ChevronRight />
         <p className="text-foreground">Editar invitado</p>

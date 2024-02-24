@@ -2,14 +2,16 @@ import { SubmissionResult, getInputProps, useForm } from '@conform-to/react';
 import { getZodConstraint, parseWithZod } from '@conform-to/zod';
 import { Form } from '@remix-run/react';
 import { z } from 'zod';
-import { Alert, AlertTitle, AlertDescription } from './ui/alert';
+import { Alert, AlertDescription, AlertTitle } from './ui/alert';
 import { Button } from './ui/button';
 import { FormLabel } from './ui/form/form-label';
 import { FormMessage } from './ui/form/form-message';
 import { Input } from './ui/input';
+import { RadioGroup, RadioGroupItem } from './ui/radio-group';
 
 export const schema = z.object({
   name: z.string().min(3),
+  status: z.enum(['going', 'not going', 'pending']),
 });
 
 type GuestFormProps = {
@@ -47,6 +49,21 @@ export function GuestForm({ lastResult, defaultValue }: GuestFormProps) {
         </FormLabel>
         <Input {...getInputProps(fields.name, { type: 'text' })} />
         <FormMessage errors={fields.name.errors} />
+      </div>
+
+      <div className="space-y-2">
+        <FormLabel errors={fields.status.errors} htmlFor={fields.status.id}>
+          Estatus
+        </FormLabel>
+        <RadioGroup {...getInputProps(fields.status, { type: 'text' })}>
+          {['going', 'not going', 'pending'].map((option) => (
+            <div key={option} className="flex items-center space-x-2">
+              <RadioGroupItem value={option} id={option} />
+              <FormLabel htmlFor={option}>{option}</FormLabel>
+            </div>
+          ))}
+        </RadioGroup>
+        <FormMessage errors={fields.status.errors} />
       </div>
 
       <Button>Guardar invitado</Button>
