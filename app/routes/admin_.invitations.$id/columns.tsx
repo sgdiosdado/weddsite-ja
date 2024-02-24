@@ -1,5 +1,7 @@
-import { createColumnHelper } from '@tanstack/react-table';
+import { Link } from '@remix-run/react';
+import { ColumnDef, createColumnHelper } from '@tanstack/react-table';
 import { z } from 'zod';
+import { Button } from '~/components/ui/button';
 
 const guestSchema = z.object({
   id: z.string().uuid(),
@@ -35,4 +37,13 @@ export const columns = [
     header: 'Última actualización',
     cell: ({ getValue }) => dateFormatter.format(new Date(getValue())),
   }),
+  {
+    accessorKey: 'actions',
+    header: '',
+    cell: ({ row }) => (
+      <Button asChild variant="link">
+        <Link to={`${row.original.id}/edit/`}>Editar</Link>
+      </Button>
+    ),
+  } as ColumnDef<Guest>,
 ];

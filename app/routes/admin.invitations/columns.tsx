@@ -5,7 +5,6 @@ import { MouseEventHandler, PropsWithChildren } from 'react';
 import { z } from 'zod';
 import { Button } from '~/components/ui/button';
 import { useToast } from '~/components/ui/use-toast';
-import { Guest } from '../admin_.invitations.$id/columns';
 
 const invitationSchema = z.object({
   id: z.string().uuid(),
@@ -45,13 +44,18 @@ export const columns = [
     accessorKey: 'actions',
     header: '',
     cell: ({ row }) => (
-      <Button asChild variant="link">
-        <Link to={`/admin/invitations/${row.original.id}`}>
-          Editar invitados
-        </Link>
-      </Button>
+      <div>
+        <Button asChild variant="link">
+          <Link to={`/admin/invitations/${row.original.id}`}>
+            Administrar invitados
+          </Link>
+        </Button>
+        <Button asChild variant="link">
+          <Link to={`/admin/invitations/${row.original.id}/edit`}>Editar</Link>
+        </Button>
+      </div>
     ),
-  } as ColumnDef<Guest>,
+  } as ColumnDef<Invitation>,
 ];
 
 function IdCell({ children }: PropsWithChildren) {
