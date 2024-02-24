@@ -3,26 +3,39 @@ import { DataTable } from './data-table';
 import { db } from '~/drizzle/config.server';
 import { guests, invitations } from '~/drizzle/schema.server';
 import { Link, useLoaderData } from '@remix-run/react';
-import { eq, count } from 'drizzle-orm';
+import { eq, countDistinct, count, SQL } from 'drizzle-orm';
 import { Button } from '~/components/ui/button';
 import { Plus } from 'lucide-react';
 
 export async function loader() {
+  const sq = await db
+    .select({
+      invitationId: guests.invitationId,
+      goingGuests: count(guests.id).as('goingGuests'),
+    })
+    .from(guests)
+    .where(eq(guests.status, 'going'))
+    .groupBy(guests.invitationId)
+    .as('sq');
+
   const data = await db
     .select({
       id: invitations.id,
       phoneNumber: invitations.phoneNumber,
       createdAt: invitations.createdAt,
       updatedAt: invitations.updatedAt,
-      guests: count(guests.id),
+      guests: countDistinct(guests.id),
+      goingGuests: sq.goingGuests,
     })
     .from(invitations)
     .leftJoin(guests, eq(invitations.id, guests.invitationId))
+    .leftJoin(sq, eq(invitations.id, sq.invitationId))
     .groupBy(
       invitations.id,
       invitations.phoneNumber,
       invitations.createdAt,
       invitations.updatedAt,
+      sq.goingGuests,
     );
 
   return { data };

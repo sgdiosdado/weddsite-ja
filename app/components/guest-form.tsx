@@ -55,7 +55,10 @@ export function GuestForm({ lastResult, defaultValue }: GuestFormProps) {
         <FormLabel errors={fields.status.errors} htmlFor={fields.status.id}>
           Estatus
         </FormLabel>
-        <RadioGroup {...getInputProps(fields.status, { type: 'text' })}>
+        <RadioGroup
+          {...getInputProps(fields.status, { type: 'text' })}
+          defaultValue={fields.status.value ? fields.status.value : 'pending'}
+        >
           {['going', 'not going', 'pending'].map((option) => (
             <div key={option} className="flex items-center space-x-2">
               <RadioGroupItem value={option} id={option} />

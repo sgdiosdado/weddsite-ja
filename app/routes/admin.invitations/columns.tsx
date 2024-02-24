@@ -13,7 +13,10 @@ const invitationSchema = z.object({
   updatedAt: z.date(),
 });
 
-export type Invitation = z.infer<typeof invitationSchema> & { guests: number };
+export type Invitation = z.infer<typeof invitationSchema> & {
+  guests: number;
+  goingGuests: number;
+};
 
 const columnHelper = createColumnHelper<Invitation>();
 
@@ -39,6 +42,10 @@ export const columns = [
   }),
   columnHelper.accessor('guests', {
     header: 'Cantidad de invitados',
+  }),
+  columnHelper.accessor('goingGuests', {
+    header: 'Cantidad de asistentes',
+    cell: ({ getValue }) => (getValue() ? getValue() : 0),
   }),
   {
     accessorKey: 'actions',
