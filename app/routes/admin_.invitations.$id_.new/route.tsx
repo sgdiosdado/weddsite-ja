@@ -1,29 +1,25 @@
 import { getInputProps, useForm } from '@conform-to/react';
 import { getZodConstraint, parseWithZod } from '@conform-to/zod';
 import { ActionFunctionArgs, redirect } from '@remix-run/node';
-import { Form, Link, useActionData } from '@remix-run/react';
+import { Form, Link, useActionData, useParams } from '@remix-run/react';
 import { ChevronRight } from 'lucide-react';
+import { RouteParams } from 'routes-gen';
 import { z } from 'zod';
 import { Alert, AlertDescription, AlertTitle } from '~/components/ui/alert';
 import { Button } from '~/components/ui/button';
 import { FormLabel } from '~/components/ui/form/form-label';
 import { FormMessage } from '~/components/ui/form/form-message';
 import { Input } from '~/components/ui/input';
-import { Label } from '~/components/ui/label';
 import { db } from '~/drizzle/config.server';
-import { invitations } from '~/drizzle/schema.server';
+import { guests, invitations } from '~/drizzle/schema.server';
 
 const schema = z.object({
-  phoneNumber: z
-    .string()
-    .length(10)
-    .refine(
-      (value) => !isNaN(Number(value)),
-      'Phone number must contain only numbers',
-    ),
+  name: z.string().min(3),
 });
 
-export async function action({ request }: ActionFunctionArgs) {
+export async function action({ request, params }: ActionFunctionArgs) {
+  const { id: invitationId } =
+    params as RouteParams['/admin/invitations/:id/new'];
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema });
 
@@ -33,7 +29,7 @@ export async function action({ request }: ActionFunctionArgs) {
 
   try {
     await db.transaction(async (tx) => {
-      await tx.insert(invitations).values(submission.value);
+      await tx.insert(guests).values({ ...submission.value, invitationId });
     });
   } catch (error) {
     return submission.reply({
@@ -41,10 +37,12 @@ export async function action({ request }: ActionFunctionArgs) {
     });
   }
 
-  return redirect('/admin/invitations');
+  return redirect(`/admin/invitations/${invitationId}`);
 }
 
 export default function NewInvitation() {
+  const { id } = useParams<RouteParams['/admin/invitations/:id/new']>();
+
   const lastResult = useActionData<typeof action>();
   const [form, fields] = useForm({
     lastResult,
@@ -58,12 +56,12 @@ export default function NewInvitation() {
     <div className="mx-auto flex flex-col gap-4 px-4 py-12">
       <div className="flex items-center gap-2 text-sm text-neutral-600">
         <Button asChild variant="link">
-          <Link to="/admin/invitations/">Invitaciones</Link>
+          <Link to={`/admin/invitations/${id}/`}>Invitación</Link>
         </Button>
         <ChevronRight />
-        <p className="text-foreground">Nueva invitación</p>
+        <p className="text-foreground">Nuevo invitado</p>
       </div>
-      <h1 className="text-3xl font-bold">Nueva invitación</h1>
+      <h1 className="text-3xl font-bold">Nueva invitado</h1>
       <Form
         method="POST"
         id={form.id}
@@ -78,17 +76,11 @@ export default function NewInvitation() {
           </Alert>
         )}
         <div className="space-y-2">
-          <FormLabel
-            errors={fields.phoneNumber.errors}
-            htmlFor={fields.phoneNumber.id}
-          >
-            Número telefónico
+          <FormLabel errors={fields.name.errors} htmlFor={fields.name.id}>
+            Nombre
           </FormLabel>
-          <Input
-            {...getInputProps(fields.phoneNumber, { type: 'text' })}
-            maxLength={10}
-          />
-          <FormMessage errors={fields.phoneNumber.errors} />
+          <Input {...getInputProps(fields.name, { type: 'text' })} />
+          <FormMessage errors={fields.name.errors} />
         </div>
 
         <Button>Crear invitación</Button>

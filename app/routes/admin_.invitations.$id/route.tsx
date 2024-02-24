@@ -6,7 +6,7 @@ import { RouteParams } from 'routes-gen';
 import { Button } from '~/components/ui/button';
 import { db } from '~/drizzle/config.server';
 import { guests } from '~/drizzle/schema.server';
-import { Guest, columns } from './columns';
+import { columns } from './columns';
 import { DataTable } from './data-table';
 
 export async function loader({ params }: LoaderFunctionArgs) {
@@ -42,8 +42,10 @@ export default function Invitation() {
       <h1 className="text-3xl font-bold">Invitados</h1>
 
       <div className="flex justify-end">
-        <Button className="cursor-pointer">
-          <Plus className="mr-2 h-4 w-4" /> Añadir invitado
+        <Button asChild>
+          <Link to="new/">
+            <Plus className="mr-2 h-4 w-4" /> Añadir invitado
+          </Link>
         </Button>
       </div>
 

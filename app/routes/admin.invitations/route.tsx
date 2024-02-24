@@ -17,7 +17,7 @@ export async function loader() {
       guests: count(guests.id),
     })
     .from(invitations)
-    .innerJoin(guests, eq(invitations.id, guests.invitationId))
+    .leftJoin(guests, eq(invitations.id, guests.invitationId))
     .groupBy(
       invitations.id,
       invitations.phoneNumber,
@@ -38,7 +38,7 @@ export default function Invitations() {
       <h1 className="text-3xl font-bold">Invitaciones</h1>
       <div className="flex justify-end">
         <Button asChild>
-          <Link to="/admin/invitations/new/">
+          <Link to="new/">
             <Plus className="mr-2 h-4 w-4" /> Crear invitación
           </Link>
         </Button>
