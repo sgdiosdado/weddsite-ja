@@ -9,6 +9,7 @@ import {
   ScrollRestoration,
 } from '@remix-run/react';
 import stylesheet from '~/tailwind.css';
+import { Toaster } from './components/ui/toaster';
 
 {
   /* <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -44,6 +45,7 @@ export default function App() {
         <ScrollRestoration />
         <Scripts />
         <LiveReload />
+        <Toaster />
       </body>
     </html>
   );
