@@ -23,9 +23,10 @@ export const links: LinksFunction = () => [
     href: 'https://fonts.gstatic.com',
     crossOrigin: 'anonymous',
   },
+
   {
     rel: 'stylesheet',
-    href: 'https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@100;200;300;400;500&display=swap',
+    href: 'https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap',
   },
   { rel: 'stylesheet', href: stylesheet },
   ...(cssBundleHref ? [{ rel: 'stylesheet', href: cssBundleHref }] : []),

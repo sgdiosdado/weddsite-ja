@@ -4,7 +4,9 @@ import { useCountdown } from './useCountdown';
 export default function CountdownTimer({ targetDate }: { targetDate: number }) {
   const [days, hours, minutes, seconds] = useCountdown(targetDate);
 
-  if (days + hours + minutes + seconds <= 0) {
+  if (days <= -2) {
+    return <MarriedNotice />;
+  } else if (days + hours + minutes + seconds <= 0) {
     return <ExpiredNotice />;
   } else {
     return (
@@ -19,9 +21,19 @@ export default function CountdownTimer({ targetDate }: { targetDate: number }) {
 }
 
 const ExpiredNotice = () => {
-  return <div className="text-[100px] text-JA-creme-50">ESTAMOS CASADOS</div>;
+  return (
+    <div className="text-[80px] text-JA-creme-50">¡Hoy es el gran día!</div>
+  );
 };
 
+const MarriedNotice = () => {
+  return (
+    <div className="text-[50px] text-JA-creme-50">
+      Estuvimos muy felices de poder compartir este momento con ustedes. Gracias
+      por estar.
+    </div>
+  );
+};
 const ShowCounter = ({
   days,
   hours,
