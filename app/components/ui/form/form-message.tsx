@@ -13,6 +13,7 @@ export const FormMessage = React.forwardRef<
     <div className="flex flex-col">
       {errors.map((error) => (
         <p
+          key={error}
           ref={ref}
           className={cn('text-sm font-medium text-destructive', className)}
           {...props}

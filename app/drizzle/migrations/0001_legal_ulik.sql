@@ -1,0 +1,1 @@
+ALTER TABLE "guests" ADD COLUMN "menu" varchar DEFAULT 'regular' NOT NULL;

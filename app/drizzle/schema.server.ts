@@ -21,6 +21,9 @@ export const guests = pgTable('guests', {
   status: varchar('status', { enum: ['going', 'not going', 'pending'] })
     .notNull()
     .default('pending'),
+  menu: varchar('menu', { enum: ['regular', 'vegetarian'] })
+    .notNull()
+    .default('regular'),
   invitationId: uuid('invitationId')
     .notNull()
     .references(() => invitations.id, {

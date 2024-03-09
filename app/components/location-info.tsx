@@ -1,3 +1,5 @@
+import { ChurchIcon } from 'lucide-react';
+
 export function LocationInfo() {
   return (
     <section className="flex min-h-svh flex-col items-center justify-center gap-3 bg-JA-creme-50 p-6">
@@ -26,6 +28,23 @@ export function LocationInfo() {
       </a>
 
       <div className="mt-10 grid grid-cols-3 gap-x-7">
+        <div className="flex items-center justify-end border-r-2 border-JA-sage-150 p-2 font-light italic text-JA-sage-150">
+          <p>4:00 pm</p>
+        </div>
+        <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
+          <ChurchIcon className="fill-JA-sage-100" width={40} height={40} />
+          <hr className="border-JA-sage-100 opacity-30" />
+          <p>Misa</p>
+          <p className="font-light">Parroquia del Rosario de Monterrey A.R.D</p>
+          <a
+            href="https://maps.app.goo.gl/L6tRdHkfVZFZRK4P8"
+            className="max-w-80 bg-JA-sage-100 p-2 text-center italic text-JA-creme-50 hover:bg-JA-sage-150"
+            target="_blank"
+          >
+            UBICACIÓN
+          </a>
+        </div>
+
         <div className="flex items-center justify-end border-r-2 border-JA-sage-150 p-2 font-light italic text-JA-sage-150">
           <p>5:30 pm</p>
         </div>
@@ -60,7 +79,7 @@ export function LocationInfo() {
         <div className="flex items-center justify-end border-r-2 border-[#B5B9B6] p-2 font-light italic text-JA-sage-150">
           <p>
             10:00 PM - <br />
-            2:00 AM
+            1:00 AM
           </p>
         </div>
         <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
