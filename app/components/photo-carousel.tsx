@@ -1,12 +1,8 @@
 import Autoplay from 'embla-carousel-autoplay';
 
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from './ui/carousel';
+import { Carousel, CarouselContent, CarouselItem } from './ui/carousel';
+
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 type Photo = { source: string };
 
@@ -28,6 +24,7 @@ export function PhotoCarousel({
           Autoplay({
             delay: 2000,
           }),
+          WheelGesturesPlugin(),
         ]}
         className="mt-10 w-full lg:max-w-screen-lg"
       >

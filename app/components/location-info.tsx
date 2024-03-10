@@ -1,15 +1,12 @@
 import { ChurchIcon } from 'lucide-react';
 
-export function LocationInfo() {
+export function LocationInfo({ invitedToCivil }: { invitedToCivil: boolean }) {
   return (
     <section className="flex min-h-svh flex-col items-center justify-center gap-3 bg-JA-creme-50 p-6">
       <p className="text-sm  font-medium text-JA-sage-150">ITINERARIO</p>
       <img src="./images/separator-dark.svg" alt="Separador de itinerario" />
-      <p className="mt-1 text-3xl font-light italic text-JA-sage-150">
-        Día de la boda
-      </p>
-      <p className="text-lg font-light text-JA-sage-150">
-        Sábado 4 de mayo de 2024
+      <p className="text-center  text-2xl font-light text-JA-sage-150">
+        Sábado 4 de mayo, 2024
       </p>
       <hr className="w-3/4 border-JA-sage-100 opacity-30" />
       <p className="font-light text-JA-sage-150">
@@ -23,6 +20,7 @@ export function LocationInfo() {
         href="https://maps.app.goo.gl/7mE8xLuguVdNmmkV7"
         className="max-w-80 bg-JA-sage-100 p-2 text-center italic text-JA-creme-50 hover:bg-JA-sage-150"
         target="_blank"
+        rel="noreferrer"
       >
         UBICACIÓN
       </a>
@@ -40,19 +38,24 @@ export function LocationInfo() {
             href="https://maps.app.goo.gl/L6tRdHkfVZFZRK4P8"
             className="max-w-80 bg-JA-sage-100 p-2 text-center italic text-JA-creme-50 hover:bg-JA-sage-150"
             target="_blank"
+            rel="noreferrer"
           >
             UBICACIÓN
           </a>
         </div>
 
-        <div className="flex items-center justify-end border-r-2 border-JA-sage-150 p-2 font-light italic text-JA-sage-150">
-          <p>5:30 pm</p>
-        </div>
-        <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
-          <img src="./images/rings.svg" alt="Icono de anillos" width={60} />
-          <hr className="border-JA-sage-100 opacity-30" />
-          <p className="">Civil</p>
-        </div>
+        {invitedToCivil ? (
+          <>
+            <div className="flex items-center justify-end border-r-2 border-JA-sage-150 p-2 font-light italic text-JA-sage-150">
+              <p>5:30 pm</p>
+            </div>
+            <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
+              <img src="./images/rings.svg" alt="Icono de anillos" width={60} />
+              <hr className="border-JA-sage-100 opacity-30" />
+              <p className="">Civil</p>
+            </div>{' '}
+          </>
+        ) : null}
 
         <div className="flex items-center justify-end border-r-2 border-JA-sage-100 p-2 font-light italic text-JA-sage-150">
           <p>8:00 pm</p>

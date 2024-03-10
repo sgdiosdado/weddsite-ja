@@ -12,9 +12,9 @@ import { LodgingInfo } from '~/components/lodging-info';
 import TransportInfo from '~/components/transport-info';
 import CountdownTimer from '~/components/countdown/countdown';
 import { db } from '~/drizzle/config.server';
-import { guests } from '~/drizzle/schema.server';
+import { guests, invitations } from '~/drizzle/schema.server';
 import { GuestForm, schema } from './guest-form';
-import { useActionData, useFetcher, useLoaderData } from '@remix-run/react';
+import { useActionData, useLoaderData } from '@remix-run/react';
 
 export const meta: MetaFunction = () => {
   return [
@@ -25,6 +25,11 @@ export const meta: MetaFunction = () => {
 
 export async function loader({ params }: LoaderFunctionArgs) {
   const { invitationId } = params as RouteParams['/:invitationId'];
+  const invitation = await db
+    .select({ invitedToCivil: invitations.invitedToCivil })
+    .from(invitations)
+    .where(eq(invitations.id, invitationId));
+
   const guestList = await db
     .select({
       id: guests.id,
@@ -35,10 +40,13 @@ export async function loader({ params }: LoaderFunctionArgs) {
     .from(guests)
     .where(eq(guests.invitationId, invitationId));
 
-  return { guests: guestList };
+  return {
+    guests: guestList,
+    invitedToCivil: invitation[0].invitedToCivil,
+  };
 }
 
-export async function action({ request, params }: ActionFunctionArgs) {
+export async function action({ request }: ActionFunctionArgs) {
   const formData = await request.formData();
   const submission = parseWithZod(formData, { schema });
 
@@ -64,8 +72,10 @@ export default function Index() {
   const defaultValue = useLoaderData<typeof loader>();
   const lastResult = useActionData<typeof action>();
 
+  const guestsCount = defaultValue.guests.length;
+
   return (
-    <main className="flex flex-col bg-JA-sage-100">
+    <main className="flex flex-col bg-JA-sage-100 font-main">
       <WeddingCover />
 
       <section className="mt-4 bg-JA-creme-50 p-6 text-center font-light leading-relaxed">
@@ -82,7 +92,7 @@ export default function Index() {
         <CountdownTimer targetDate={WEDDING_DATE.getTime()} />
       </section>
 
-      <LocationInfo />
+      <LocationInfo invitedToCivil={defaultValue.invitedToCivil} />
 
       <LodgingInfo />
 
@@ -95,8 +105,11 @@ export default function Index() {
         <img src="./images/separator-light.svg" alt="Separador de hospedaje" />
         <p className="text-center font-light">
           Estamos muy felices de poder compartir este hermoso momento junto a
-          ustedes. Por favor confirma tu asistencia dando click en el siguiente
-          botón:
+          ustedes. Esta invitación es para{' '}
+          <strong className="font-bold">
+            {guestsCount} {guestsCount > 1 ? 'invitados' : 'invitado'}
+          </strong>
+          . Por favor, confirma asistencia:
         </p>
         <GuestForm defaultValue={defaultValue} lastResult={lastResult} />
       </section>

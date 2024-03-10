@@ -15,6 +15,13 @@
       "when": 1709089145796,
       "tag": "0001_legal_ulik",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1710042912532,
+      "tag": "0002_soft_ozymandias",
+      "breakpoints": true
     }
   ]
 }

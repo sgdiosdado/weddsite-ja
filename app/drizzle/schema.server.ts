@@ -1,5 +1,11 @@
-import { sql } from 'drizzle-orm';
-import { pgTable, text, timestamp, uuid, varchar } from 'drizzle-orm/pg-core';
+import {
+  boolean,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar,
+} from 'drizzle-orm/pg-core';
 import { v4 as uuidv4 } from 'uuid';
 
 // TODO: Replace sqlite with pg
@@ -9,6 +15,7 @@ export const invitations = pgTable('invitations', {
     .primaryKey()
     .$defaultFn(() => uuidv4()),
   phoneNumber: varchar('phone_number', { length: 10 }).notNull(),
+  invitedToCivil: boolean('invited_to_civil').notNull().default(false),
   createdAt: timestamp('created_at').notNull().defaultNow(),
   updatedAt: timestamp('updated_at').notNull().defaultNow(),
 });

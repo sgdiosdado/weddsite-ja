@@ -6,6 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from './ui/carousel';
+import { WheelGesturesPlugin } from 'embla-carousel-wheel-gestures';
 
 function GiftCard({ children }: { children: ReactNode }) {
   return (
@@ -22,6 +23,7 @@ export function GiftsCarousel() {
         align: 'start',
         breakpoints: { '(min-width: 1024px)': { active: false } },
       }}
+      plugins={[WheelGesturesPlugin()]}
       className="flex max-w-screen-lg flex-col items-center "
     >
       <CarouselContent>
@@ -40,6 +42,7 @@ export function GiftsCarousel() {
           <a
             href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51378762"
             target="_blank"
+            rel="noreferrer"
           >
             <GiftCard>
               <img
@@ -59,7 +62,7 @@ export function GiftsCarousel() {
             <img
               src="./images/BBVA-logo.png"
               alt="Logotipo de BBVA"
-              className="my-auto h-32"
+              className="my-auto w-16"
             />
             <p className="text-center text-sm">CLABE: 0125 8001 5540 613735</p>
             <p className="text-center text-sm">Tarjeta: 4152 3140 2095 1219</p>

@@ -11,11 +11,6 @@ import {
 import stylesheet from '~/tailwind.css';
 import { Toaster } from './components/ui/toaster';
 
-{
-  /* <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet"></link> */
-}
 export const links: LinksFunction = () => [
   { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
   {

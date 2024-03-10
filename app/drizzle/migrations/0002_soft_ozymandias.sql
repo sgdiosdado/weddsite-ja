@@ -1,0 +1,1 @@
+ALTER TABLE "invitations" ADD COLUMN "invited_to_civil" boolean DEFAULT false NOT NULL;
