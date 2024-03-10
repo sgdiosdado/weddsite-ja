@@ -7,6 +7,7 @@ import { FormLabel } from './ui/form/form-label';
 import { Input } from './ui/input';
 import { FormMessage } from './ui/form/form-message';
 import { Button } from './ui/button';
+import { Checkbox } from './ui/checkbox';
 
 export const schema = z.object({
   phoneNumber: z
@@ -16,6 +17,7 @@ export const schema = z.object({
       (value) => !isNaN(Number(value)),
       'Phone number must contain only numbers',
     ),
+  invitedToCivil: z.boolean().default(false),
 });
 
 type InvitationFormProps = {
@@ -62,6 +64,17 @@ export function InvitationForm({
           maxLength={10}
         />
         <FormMessage errors={fields.phoneNumber.errors} />
+      </div>
+      <div className="flex items-center gap-2">
+        <FormLabel
+          errors={fields.invitedToCivil.errors}
+          htmlFor={fields.invitedToCivil.id}
+        >
+          ¿Invitado al civil?
+        </FormLabel>
+        <Checkbox
+          {...getInputProps(fields.invitedToCivil, { type: 'checkbox' })}
+        />
       </div>
 
       <Button>Guardar invitación</Button>

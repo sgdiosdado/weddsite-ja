@@ -18,7 +18,10 @@ export async function loader({ params }: LoaderFunctionArgs) {
     params as RouteParams['/admin/invitations/:id/edit'];
 
   const invitation = await db
-    .select()
+    .select({
+      phoneNumber: invitations.phoneNumber,
+      invitedToCivil: invitations.invitedToCivil,
+    })
     .from(invitations)
     .where(eq(invitations.id, invitationId));
 
@@ -40,10 +43,14 @@ export async function action({ request, params }: ActionFunctionArgs) {
     await db.transaction(async (tx) => {
       await tx
         .update(invitations)
-        .set(submission.value)
+        .set({
+          invitedToCivil: submission.value.invitedToCivil,
+          phoneNumber: submission.value.phoneNumber,
+        })
         .where(eq(invitations.id, invitationId));
     });
   } catch (error) {
+    console.error(error);
     return submission.reply({
       formErrors: ['Unxpected error ocurred. Try again later'],
     });
