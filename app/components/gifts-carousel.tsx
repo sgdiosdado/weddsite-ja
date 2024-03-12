@@ -48,7 +48,7 @@ export function GiftsCarousel() {
               <img
                 src="./images/liverpool.png"
                 alt="Logotipo de Liverpool"
-                className="mt-auto"
+                className="mt-auto grayscale"
               />
               <p className="mt-auto w-full text-center text-sm">
                 Revisa nuestra mesa de regalos

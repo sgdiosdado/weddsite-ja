@@ -21,13 +21,14 @@ export function LodgingInfo() {
         href="https://maps.app.goo.gl/NoH6JTPjNGbHnMma6"
         target="_blank"
         className=" mt-4 w-full max-w-80 bg-JA-sage-150 p-2 text-center italic text-JA-creme-50 hover:bg-JA-creme-50 hover:text-JA-sage-150"
+        rel="noreferrer"
       >
         UBICACIÓN
       </a>
       <p className=" text-center text-lg font-light text-JA-creme-50">
         Te recomendamos hospedarte en el hotel{' '}
         <strong className="font-medium italic">Novotel Valle</strong>, ya que
-        contaremos con transporte del hotel a la ceremonia.
+        contaremos con transporte.
       </p>
       <p className=" text-center text-lg font-light text-JA-creme-50">
         Te compartimos el código con tarifa especial para tu reservación y el
@@ -44,8 +45,8 @@ export function LodgingInfo() {
         </span>
       </p>
       <p className=" text-center text-lg font-light text-JA-creme-50">
-        Si tienes alguna otra opción en mente, te recomendamos que sea en la
-        zona sur de Monterrey o en San Pedro Garza García.
+        Si tienes otra opción en mente, te recomendamos que sea en la zona sur
+        de Monterrey o en San Pedro Garza García.
       </p>
     </section>
   );

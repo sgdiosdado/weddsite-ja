@@ -58,7 +58,7 @@ export function LocationInfo({ invitedToCivil }: { invitedToCivil: boolean }) {
         ) : null}
 
         <div className="flex items-center justify-end border-r-2 border-JA-sage-100 p-2 font-light italic text-JA-sage-150">
-          <p>8:00 pm</p>
+          <p>7:00 pm</p>
         </div>
         <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
           <img src="./images/glasses.svg" alt="Icono de copas" width={60} />
@@ -67,7 +67,7 @@ export function LocationInfo({ invitedToCivil }: { invitedToCivil: boolean }) {
         </div>
 
         <div className="flex items-center justify-end border-r-2 border-JA-sage-50 p-3 font-light italic text-JA-sage-150">
-          <p>9:00 pm</p>
+          <p>8:00 pm</p>
         </div>
         <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
           <img
@@ -80,10 +80,7 @@ export function LocationInfo({ invitedToCivil }: { invitedToCivil: boolean }) {
         </div>
 
         <div className="flex items-center justify-end border-r-2 border-[#B5B9B6] p-2 font-light italic text-JA-sage-150">
-          <p>
-            10:00 PM - <br />
-            1:00 AM
-          </p>
+          <p>9:00 PM</p>
         </div>
         <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
           <img

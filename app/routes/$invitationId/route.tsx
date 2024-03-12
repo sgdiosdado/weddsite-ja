@@ -80,10 +80,15 @@ export default function Index() {
 
       <section className="mt-4 bg-JA-creme-50 p-6 text-center font-light leading-relaxed">
         <p>
-          Con alegría en nuestros corazones, les invitamos a celebrar el amor de
-          <span className="font-medium italic"> Jacqueline y Andrés</span> en el
-          día de su boda. Únanse a nosotros para compartir este momento lleno de
-          amor y felicidad
+          Llegamos justo a tiempo para enamorarnos, para construir un amor
+          invencible, para ser cómplices en nuestros sueños, para que seamos el
+          uno para el otro, porque nuestros corazones están destinados a
+          permanecer toda la vida.
+        </p>
+        <p>
+          {' '}
+          Nos encantaría que formaras parte de este momento lleno de amor y
+          felicidad en el día de nuestra boda.
         </p>
       </section>
 
@@ -96,7 +101,7 @@ export default function Index() {
 
       <LodgingInfo />
 
-      <TransportInfo />
+      <TransportInfo invitedToCivil={defaultValue.invitedToCivil} />
 
       <section className="flex flex-col items-center justify-center gap-5 bg-JA-sage-100  px-10 py-20 text-lg text-JA-creme-50">
         <p className="mt-1 text-center text-3xl font-light italic ">
@@ -107,10 +112,11 @@ export default function Index() {
           Estamos muy felices de poder compartir este hermoso momento junto a
           ustedes. Esta invitación es para{' '}
           <strong className="font-bold">
-            {guestsCount} {guestsCount > 1 ? 'invitados' : 'invitado'}
+            {guestsCount} {guestsCount > 1 ? 'personas' : 'persona'}
           </strong>
           . Por favor, confirma asistencia:
         </p>
+        <p className="italic">Ceremonia y recepción únicamente para adultos</p>
         <GuestForm defaultValue={defaultValue} lastResult={lastResult} />
       </section>
     </main>
