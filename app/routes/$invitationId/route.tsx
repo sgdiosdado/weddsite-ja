@@ -83,7 +83,7 @@ export default function Index() {
           Llegamos justo a tiempo para enamorarnos, para construir un amor
           invencible, para ser cómplices en nuestros sueños, para que seamos el
           uno para el otro, porque nuestros corazones están destinados a
-          permanecer toda la vida.
+          permanecer toda la vida juntos.
         </p>
         <p>
           {' '}

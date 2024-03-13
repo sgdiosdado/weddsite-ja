@@ -14,7 +14,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '~/components/ui/select';
-import ConfettiExplosion from 'react-confetti-explosion';
 
 export const schema = z.object({
   guests: z

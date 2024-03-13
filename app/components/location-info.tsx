@@ -80,7 +80,10 @@ export function LocationInfo({ invitedToCivil }: { invitedToCivil: boolean }) {
         </div>
 
         <div className="flex items-center justify-end border-r-2 border-[#B5B9B6] p-2 font-light italic text-JA-sage-150">
-          <p>9:00 PM</p>
+          <p>
+            9:00 pm - <br />
+            1:00 am
+          </p>
         </div>
         <div className="col-span-2 flex min-h-36 flex-col justify-center gap-2">
           <img
