@@ -21,13 +21,12 @@ export function GiftsCarousel() {
     <Carousel
       opts={{
         align: 'start',
-        breakpoints: { '(min-width: 1024px)': { active: false } },
       }}
       plugins={[WheelGesturesPlugin()]}
-      className="flex max-w-screen-lg flex-col items-center "
+      className="max-w-96"
     >
       <CarouselContent>
-        <CarouselItem className="basis-[80%] md:basis-1/2">
+        <CarouselItem className="basis-[80%]">
           <GiftCard>
             <img
               src="./images/envelope2.svg"
@@ -38,7 +37,7 @@ export function GiftsCarousel() {
           </GiftCard>
         </CarouselItem>
 
-        <CarouselItem className="basis-[80%] md:basis-1/2">
+        <CarouselItem className="basis-[80%]">
           <a
             href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51378762"
             target="_blank"
@@ -57,7 +56,7 @@ export function GiftsCarousel() {
           </a>
         </CarouselItem>
 
-        <CarouselItem className="basis-[80%] md:basis-1/2">
+        <CarouselItem className="basis-[80%]">
           <GiftCard>
             <img
               src="./images/BBVA-logo.png"
